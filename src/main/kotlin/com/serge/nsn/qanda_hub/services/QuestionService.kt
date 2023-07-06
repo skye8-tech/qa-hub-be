@@ -1,15 +1,17 @@
 package com.serge.nsn.qanda_hub.services
 
-import com.serge.nsn.qanda_hub.dto.QuestionDto
-import com.serge.nsn.qanda_hub.entities.QuestionEntity
-import com.serge.nsn.qanda_hub.entities.UserEntity
-import com.serge.nsn.qanda_hub.repositories.QuestionRepository
+import com.serge.nsn.qanda_hub.api.dto.QuestionDto
+import com.serge.nsn.qanda_hub.api.dto.UserDto
+import com.serge.nsn.qanda_hub.data.entities.QuestionEntity
+import com.serge.nsn.qanda_hub.data.entities.UserEntity
+import com.serge.nsn.qanda_hub.data.repositories.QuestionRepository
 import org.springframework.stereotype.Service
 
 @Service
 class QuestionService(
-    private val questionRepository: QuestionRepository
-){
+    private val questionRepository: QuestionRepository,
+    private val userService: UserService
+) {
     fun askQuestion(dto: QuestionDto) =
         questionRepository
             .save(
@@ -17,9 +19,15 @@ class QuestionService(
                     dto.question_id,
                     dto.title,
                     dto.content,
-                    UserEntity(user_id = dto.question_id, name = "", username = "", email = "", password = "")
+                    UserEntity( userService.getById(2).user_id)
+                    )
+
                 )
-            )
-    fun getAllQuestions() = questionRepository.findAll()
-    fun getQuestionById(id: Long) = questionRepository.findById(id)
+
+    fun getAllQuestions() = questionRepository.findAll().map { QuestionDto(it) }
+    fun getQuestionById(id: Long) = questionRepository.findById(id).map { QuestionDto(it) }
+
+    fun  getByUserId(userId: Long): List<QuestionDto> {
+        return questionRepository.findAllByUserId(userId).map { QuestionDto(it) }
+    }
 }

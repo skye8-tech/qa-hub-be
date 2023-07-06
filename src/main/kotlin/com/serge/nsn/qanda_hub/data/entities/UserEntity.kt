@@ -1,20 +1,20 @@
-package com.serge.nsn.qanda_hub.entities
+package com.serge.nsn.qanda_hub.data.entities
 
 import jakarta.persistence.*
-import org.aspectj.weaver.patterns.TypePatternQuestions
 
 
 @Entity
 
-data class UserEntity (
+data class UserEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val user_id: Long?=null,
+    val id: Long? = null,
     val name: String = "",
     val username: String = "",
     val password: String = "",
+    @Column(unique = true)
     val email: String = "",
-    val role: String = "",
+    val roles: String = "",
 
     @OneToMany(mappedBy = "user")
     val questions: List<QuestionEntity> = mutableListOf(),

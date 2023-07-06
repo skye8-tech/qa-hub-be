@@ -1,4 +1,4 @@
-package com.serge.nsn.qanda_hub.dto
+package com.serge.nsn.qanda_hub.api.dto
 
 class CommentDto(
     val comment_id: Long? = null,
