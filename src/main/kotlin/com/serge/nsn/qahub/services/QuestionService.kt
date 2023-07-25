@@ -23,6 +23,7 @@ class QuestionService(
                     id = dto.id,
                     title = dto.title,
                     content = dto.content,
+                    tag = dto.tag,
                     author = questionAuthor.name,
                     user = questionAuthor
                 )

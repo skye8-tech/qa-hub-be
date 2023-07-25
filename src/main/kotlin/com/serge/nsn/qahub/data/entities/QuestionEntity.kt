@@ -10,6 +10,7 @@ data class QuestionEntity(
     val title: String = "",
     val content: String = "",
     val author: String = "",
+    val tag: String = "",
 
     @ManyToOne
     @JoinColumn(name = "user_id")
