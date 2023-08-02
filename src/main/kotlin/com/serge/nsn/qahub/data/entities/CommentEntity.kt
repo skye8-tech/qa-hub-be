@@ -8,13 +8,14 @@ data class CommentEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val content: String,
+    val author: String,
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id")
-    val question: QuestionEntity? = null,
+    val question: QuestionEntity,
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    val user: UserEntity? = null
+    val user: UserEntity
 
 )

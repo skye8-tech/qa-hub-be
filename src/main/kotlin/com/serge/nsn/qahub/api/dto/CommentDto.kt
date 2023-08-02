@@ -1,11 +1,15 @@
 package com.serge.nsn.qahub.api.dto
 
+import com.serge.nsn.qahub.data.entities.CommentEntity
+
 class CommentDto(
     val comment_id: Long? = null,
-    val content: String = ""
+    val content: String = "",
+    val author: String = ""
 ) {
-    constructor(commentDto: CommentDto) : this(
-        comment_id = commentDto.comment_id,
-        content = commentDto.content
+    constructor(commentEntity: CommentEntity) : this(
+        comment_id = commentEntity.id,
+        content = commentEntity.content,
+        author = commentEntity.author
     )
 }

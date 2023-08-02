@@ -4,6 +4,7 @@ import com.serge.nsn.qahub.api.dto.AnswerDto
 import com.serge.nsn.qahub.services.AnswerService
 import lombok.RequiredArgsConstructor
 import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 @RestController
 @RequiredArgsConstructor
@@ -14,10 +15,10 @@ class AnswerController(
     @GetMapping("/all")
     fun getAll() = answerService.getAllAnswers()
 
-    @GetMapping("/answer/{id}")
+    @GetMapping("/{id}")
     fun getAnswer(@PathVariable id: Long) = answerService.getAnswerById(id)
 
-    @PostMapping("/answer/{id}/provide-answer")
-    fun answer(@RequestBody answer: AnswerDto, @PathVariable id: Long) = answerService.answerQuestion(answer, id)
+    @PostMapping("/{id}/answer")
+    fun answer(@RequestBody answer: AnswerDto, @PathVariable id: Long, principal: Principal) = answerService.answerQuestion(answer, id, principal)
 
 }

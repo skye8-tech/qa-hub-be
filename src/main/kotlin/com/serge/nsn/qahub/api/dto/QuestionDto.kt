@@ -8,7 +8,7 @@ class QuestionDto(
     val content: String = "",
     val author: String = "",
     val tag: String,
-//    val user: UserDto? = null
+
 ) {
     constructor(questionEntity: QuestionEntity) : this(
         id = questionEntity.id,
@@ -16,6 +16,6 @@ class QuestionDto(
         content = questionEntity.content,
         author = questionEntity.author,
         tag = questionEntity.tag
-//        user = questionEntity.user
+
     )
 }

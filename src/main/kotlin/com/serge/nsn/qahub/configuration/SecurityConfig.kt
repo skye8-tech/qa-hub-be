@@ -78,7 +78,7 @@ class SecurityConfig(
     @Bean
     fun corsConfig(): CorsFilter {
         val config = CorsConfiguration()
-        config.addAllowedOrigin("http://192.168.119.99:4200")
+        config.addAllowedOrigin("http://192.168.15.99:4200")
         config.addAllowedOrigin("http://localhost:4200")
         config.addAllowedMethod("POST")
         config.addAllowedMethod("GET")
