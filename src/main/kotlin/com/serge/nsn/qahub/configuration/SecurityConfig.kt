@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
 import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
 
@@ -30,7 +31,6 @@ class SecurityConfig(
     private val userDetailsService: QAUserDetailsService,
     private val jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint,
 ) {
-
     companion object {
         val UN_SECURED_URL = arrayOf("/api/auth/**", "/api/auth/login")
     }
@@ -52,6 +52,7 @@ class SecurityConfig(
     @Throws(Exception::class)
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         return http.httpBasic().and().csrf().disable().userDetailsService(userDetailsService)
+            .cors { cors -> cors.configurationSource(corsConfigSource()) }
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers(*UN_SECURED_URL).permitAll()
                     .anyRequest().fullyAuthenticated()
@@ -75,17 +76,22 @@ class SecurityConfig(
         return authConfig.authenticationManager
     }
 
-    @Bean
-    fun corsConfig(): CorsFilter {
+    fun corsConfigSource(): CorsConfigurationSource{
         val config = CorsConfiguration()
         config.addAllowedOrigin("http://192.168.15.99:4200")
         config.addAllowedOrigin("http://localhost:4200")
         config.addAllowedMethod("POST")
         config.addAllowedMethod("GET")
+        config.allowedMethods = listOf("POST", "GET")
         config.addAllowedHeader("*")
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", config)
-        return CorsFilter(source)
+        return source
+    }
+
+    @Bean
+    fun corsConfig(): CorsFilter {
+        return CorsFilter(corsConfigSource())
     }
 
 }

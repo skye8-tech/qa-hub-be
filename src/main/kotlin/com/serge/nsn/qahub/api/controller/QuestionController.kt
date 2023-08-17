@@ -1,27 +1,26 @@
 package com.serge.nsn.qahub.api.controller
 
-import com.serge.nsn.qahub.api.dto.QuestionDto
-import com.serge.nsn.qahub.services.QuestionService
+import com.serge.nsn.qahub.services.PostService
 import org.springframework.web.bind.annotation.*
-import java.security.Principal
 
 @RestController
 @RequestMapping("/api/question")
 class QuestionController(
-    private val questionService: QuestionService
+    private val postService: PostService
 ) {
 
-    @GetMapping("/all")
-    fun getAll() = questionService.getAllQuestions()
-
-    @GetMapping("/{id}")
-    fun get(@PathVariable id: Long) = questionService.getQuestionById(id)
-
-    @GetMapping("/user/{userId}")
-    fun getByUserId(@PathVariable userId: Long): List<QuestionDto> {
-        return questionService.getByUserId(userId)
+//    @GetMapping("/all")
+//    fun getAll() = questionService.getAllQuestions()
+//
+//    @GetMapping("/{id}")
+//    fun get(@PathVariable id: Long) = questionService.getQuestionById(id)
+//
+//    @GetMapping("/user/{userId}")
+//    fun getByUserId(@PathVariable userId: Long): List<PostDto> {
+//        return questionService.getByUserId(userId)
     }
-
-    @PostMapping("/ask")
-    fun ask(@RequestBody question: QuestionDto, principal: Principal) = questionService.askQuestion(question, principal)
-}
+//
+//    @CrossOrigin(origins = ["http://localhost:4200/"])
+////    @PostMapping("/ask")
+////    fun ask(@RequestBody question: PostDto, principal: Principal) = questionService.askQuestion(question, principal)
+////}

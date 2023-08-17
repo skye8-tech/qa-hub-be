@@ -17,12 +17,9 @@ data class UserEntity(
     val roles: String = "",
 
     @OneToMany(mappedBy = "user")
-    val questions: List<QuestionEntity> = mutableListOf(),
+    val posts: List<PostEntity> = mutableListOf(),
 
     @OneToMany(mappedBy = "user")
-    val answers: List<AnswerEntity> = mutableListOf(),
-
-    @OneToMany(mappedBy = "user")
-    val comments: List<CommentEntity> = mutableListOf()
+    val comments: List<PostEntity> = mutableListOf()
 )
 

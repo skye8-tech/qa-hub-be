@@ -3,16 +3,18 @@ package com.serge.nsn.qahub.data.entities
 import jakarta.persistence.*
 
 @Entity
-data class AnswerEntity(
+data class VoteEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val content: String,
-    val author: String,
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    val type: VoteType,
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "question_id")
-    val question: QuestionEntity,
+    @JoinColumn(name = "post_id")
+    val postEntity: PostEntity,
 
     @ManyToOne
     @JoinColumn(name = "user_id")
