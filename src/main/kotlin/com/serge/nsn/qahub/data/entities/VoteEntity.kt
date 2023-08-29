@@ -14,7 +14,7 @@ data class VoteEntity(
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
-    val postEntity: PostEntity,
+    val post: PostEntity,
 
     @ManyToOne
     @JoinColumn(name = "user_id")

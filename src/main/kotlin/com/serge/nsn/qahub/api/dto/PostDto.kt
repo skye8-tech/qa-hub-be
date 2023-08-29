@@ -7,8 +7,8 @@ class PostDto(
     val title: String? = "",
     val content: String = "",
     val author: String = "",
-    val tag: String?,
-    val postID: Long? = null
+    val tag: String?
+
 
 ) {
     constructor(postEntity: PostEntity) : this(
@@ -17,7 +17,7 @@ class PostDto(
         content = postEntity.content,
         author = postEntity.user.name,
         tag = postEntity.tag,
-        postID = postEntity.postId,
+
 
     )
 }

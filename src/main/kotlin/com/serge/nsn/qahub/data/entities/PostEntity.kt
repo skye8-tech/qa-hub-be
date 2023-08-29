@@ -17,10 +17,7 @@ data class PostEntity(
     @Enumerated(EnumType.STRING)
     val type: PostType,
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "question_Id")
-    val question: PostEntity?,
-    val postId: Long?,
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post")
@@ -30,7 +27,7 @@ data class PostEntity(
     @JoinColumn(name = "user_id")
     val user: UserEntity,
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "post")
     val answers: List<PostEntity> = listOf(),
 
     @OneToMany(mappedBy = "id")

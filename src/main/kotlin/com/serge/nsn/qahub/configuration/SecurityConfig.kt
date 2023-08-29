@@ -78,11 +78,11 @@ class SecurityConfig(
 
     fun corsConfigSource(): CorsConfigurationSource{
         val config = CorsConfiguration()
-        config.addAllowedOrigin("http://192.168.15.99:4200")
+        config.addAllowedOrigin("http://192.168.2.99:4200")
         config.addAllowedOrigin("http://localhost:4200")
         config.addAllowedMethod("POST")
         config.addAllowedMethod("GET")
-        config.allowedMethods = listOf("POST", "GET")
+        config.allowedMethods = listOf("POST", "GET", "DELETE")
         config.addAllowedHeader("*")
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", config)
