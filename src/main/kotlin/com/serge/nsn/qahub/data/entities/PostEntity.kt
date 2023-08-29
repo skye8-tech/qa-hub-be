@@ -2,7 +2,9 @@
 //import jakarta.persistence.*
 
 package com.serge.nsn.qahub.data.entities
+
 import jakarta.persistence.*
+
 @Entity
 data class PostEntity(
     @Id
@@ -13,10 +15,8 @@ data class PostEntity(
     val tag: String? = "",
 
 
-
     @Enumerated(EnumType.STRING)
     val type: PostType,
-
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -33,4 +33,4 @@ data class PostEntity(
     @OneToMany(mappedBy = "id")
     val comments: List<PostEntity> = listOf()
 
-    )
+)

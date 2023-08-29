@@ -19,5 +19,5 @@ class PostDto(
         tag = postEntity.tag,
 
 
-    )
+        )
 }

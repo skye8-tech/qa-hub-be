@@ -3,7 +3,6 @@ package com.serge.nsn.qahub.data.repositories
 import com.serge.nsn.qahub.data.entities.PostEntity
 import com.serge.nsn.qahub.data.entities.PostType
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Query
 
 interface PostRepository : JpaRepository<PostEntity, Long> {
 

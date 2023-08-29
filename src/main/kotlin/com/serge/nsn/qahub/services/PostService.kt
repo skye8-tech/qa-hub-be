@@ -161,37 +161,37 @@ class PostService(
     }
 
 
-fun downVote(postId: Long, principal: Principal): ResponseEntity<String> {
+    fun downVote(postId: Long, principal: Principal): ResponseEntity<String> {
 
-    val existingVote =
-        voteRepository.findByPostIdAndUserId(postId, userRepository.findByEmail(principal.name).get().id)
-    if (existingVote != null && existingVote.type == VoteType.DOWN) {
-        return ResponseEntity("You can't vote twice", HttpStatus.NOT_ACCEPTABLE)
-    } else if (existingVote != null && existingVote.type == VoteType.UP) {
-        voteRepository.delete(existingVote)
-        voteRepository.save(
-            VoteEntity(
-                type = VoteType.DOWN,
-                post = postRepository.findById(postId).get(),
-                user = userRepository.findByEmail(principal.name).get()
+        val existingVote =
+            voteRepository.findByPostIdAndUserId(postId, userRepository.findByEmail(principal.name).get().id)
+        if (existingVote != null && existingVote.type == VoteType.DOWN) {
+            return ResponseEntity("You can't vote twice", HttpStatus.NOT_ACCEPTABLE)
+        } else if (existingVote != null && existingVote.type == VoteType.UP) {
+            voteRepository.delete(existingVote)
+            voteRepository.save(
+                VoteEntity(
+                    type = VoteType.DOWN,
+                    post = postRepository.findById(postId).get(),
+                    user = userRepository.findByEmail(principal.name).get()
+                )
             )
-        )
-        return ResponseEntity("Vote cast Successful!", HttpStatus.OK)
-    } else {
-        voteRepository.save(
-            VoteEntity(
-                type = VoteType.DOWN,
-                post = postRepository.findById(postId).get(),
-                user = userRepository.findByEmail(principal.name).get()
+            return ResponseEntity("Vote cast Successful!", HttpStatus.OK)
+        } else {
+            voteRepository.save(
+                VoteEntity(
+                    type = VoteType.DOWN,
+                    post = postRepository.findById(postId).get(),
+                    user = userRepository.findByEmail(principal.name).get()
+                )
             )
-        )
-        return ResponseEntity("Vote cast Successful!", HttpStatus.OK)
+            return ResponseEntity("Vote cast Successful!", HttpStatus.OK)
+        }
     }
-}
 
 
-class InvalidPostTypeException(message: String) : RuntimeException(message)
-class PostNotFoundException(message: String) : RuntimeException(message)
+    class InvalidPostTypeException(message: String) : RuntimeException(message)
+    class PostNotFoundException(message: String) : RuntimeException(message)
 
 }
 //    fun getAllQuestions() = questionRepository.findAll().map { PostDto(it) }

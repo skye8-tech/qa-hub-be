@@ -76,7 +76,7 @@ class SecurityConfig(
         return authConfig.authenticationManager
     }
 
-    fun corsConfigSource(): CorsConfigurationSource{
+    fun corsConfigSource(): CorsConfigurationSource {
         val config = CorsConfiguration()
         config.addAllowedOrigin("http://192.168.2.99:4200")
         config.addAllowedOrigin("http://localhost:4200")
